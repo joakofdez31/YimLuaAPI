@@ -16,10 +16,10 @@ jobs:
         uses: microsoft/setup-msbuild@v1
 
       - name: Generate CMake project
-        run: cmake -S. -Bbuild -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CONFIGURATION_TYPES=RelWithDebInfo
+        run: cmake -S. -Bbuild -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
 
       - name: Build 64bit release DLL
-        run: cmake --build build --config RelWithDebInfo
+        run: cmake --build build
 
       - name: Rename DLL to YimLuaAPI-dev-{GITHUB_SHA}.dll
         run: ren YimLuaAPI.dll YimLuaAPI-dev-${{github.sha}}.dll
@@ -30,8 +30,3 @@ jobs:
         with:
           name: binary
           path: build/YimLuaAPI-dev-*.dll
-      - name: Upload Artifact (pdb)
-        uses: actions/upload-artifact@v4
-        with:
-          name: pdb
-          path: build/YimLuaAPI.pdb
