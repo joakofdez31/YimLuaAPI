@@ -1,2 +1,3 @@
 Trigger Windows x64 DLL build for YimLuaAPI.
 Actions enabled; trigger build now.
+Trigger corrected Release build without debug CRT.
